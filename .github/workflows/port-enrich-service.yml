@@ -28,7 +28,7 @@ jobs:
         with:
           repository: "${{ github.repository_owner }}/${{ fromJson(inputs.port_context).entity }}"
           path: ./targetRepo
-          token: ${{ secrets.ORG_ADMIN_TOKEN }}
+          token: ${{ secrets.actions.ORG_ADMIN_TOKEN }}
       - name: Copy template yml file
         run: |
           cp templates/enrichService.yml ./targetRepo/port.yml
@@ -41,7 +41,7 @@ jobs:
       - name: Open a pull request
         uses: peter-evans/create-pull-request@v5
         with:
-          token: ${{ secrets.ORG_ADMIN_TOKEN }}
+          token: ${{ secrets.actions.ORG_ADMIN_TOKEN }}
           path: ./targetRepo
           commit-message: Enrich service - ${{ fromJson(inputs.port_context).entity}}
           committer: GitHub <noreply@github.com>
@@ -56,8 +56,8 @@ jobs:
       - name: Create a log message
         uses: port-labs/port-github-action@v1
         with:
-          clientId: ${{ secrets.PORT_CLIENT_ID }}
-          clientSecret: ${{ secrets.PORT_CLIENT_SECRET }}
+          clientId: ${{ secrets.action.PORT_CLIENT_ID }}
+          clientSecret: ${{ secrets.action.PORT_CLIENT_SECRET }}
           baseUrl: https://api.us.getport.io
           operation: PATCH_RUN
           runId: ${{ fromJson(inputs.port_context).runId }}
