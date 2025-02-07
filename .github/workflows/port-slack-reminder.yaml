@@ -1,4 +1,4 @@
-# port-slack-reminder.yml
+# port-slack-reminder.yaml
 
 name: Generate Scorecards Reminders
 on:
