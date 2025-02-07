@@ -28,7 +28,7 @@ jobs:
         with:
           repository: "${{ github.repository_owner }}/${{ fromJson(inputs.port_context).entity }}"
           path: ./targetRepo
-          token: ${{ secrets.actions.ORG_ADMIN_TOKEN }}
+          token: ${{ secrets.ORG_ADMIN_TOKEN }}
       - name: Copy template yml file
         run: |
           cp templates/enrichService.yml ./targetRepo/port.yml
@@ -41,7 +41,7 @@ jobs:
       - name: Open a pull request
         uses: peter-evans/create-pull-request@v5
         with:
-          token: ${{ secrets.actions.ORG_ADMIN_TOKEN }}
+          token: ${{ secrets.ORG_ADMIN_TOKEN }}
           path: ./targetRepo
           commit-message: Enrich service - ${{ fromJson(inputs.port_context).entity}}
           committer: GitHub <noreply@github.com>
